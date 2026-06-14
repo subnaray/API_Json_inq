@@ -16,11 +16,19 @@ public class UserService {
     @Value("${api.base-url}")
     private String baseUrl;
 
+    // GET ALL USERS
     public List<User> getUsers() {
-
         return restClient.get()
                 .uri(baseUrl)
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<User>>() {});
+    }
+
+    // GET USER BY ID
+    public User getUserById(Long id) {
+        return restClient.get()
+                .uri(baseUrl + "/" + id)
+                .retrieve()
+                .body(User.class);
     }
 }
